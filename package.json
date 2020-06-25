@@ -4,14 +4,20 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint ."
+    "run-ios": "react-native run-ios",
+    "run-andriod": "react-native run-android",
+    "lint": "eslint .",
+    "lint-ci": "eslint 'src/**/*.{js,jsx}' --quiet",
+    "lint-write": "yarn lint-ci --fix",
+    "test-ci": "jest --passWithNoTests",
+    "test": "yarn test-ci --watch"
   },
   "dependencies": {
     "react": "16.8.6",
     "react-native": "0.60.5",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-i18n": "^2.0.15",
+    "react-native-screens": "^2.0.0-beta.10",
     "react-navigation": "^3.12.0"
   },
   "devDependencies": {
@@ -19,12 +25,27 @@
     "@babel/runtime": "7.5.5",
     "@react-native-community/eslint-config": "0.0.3",
     "babel-jest": "24.9.0",
-    "eslint": "6.3.0",
+    "detox": "^15.2.2",
+    "eslint": "^6.0.1",
+    "eslint-config-react-native-prettier": "^1.0.1",
+    "eslint-plugin-flowtype": "^3.12.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-react-hooks": "^1.6.1",
+    "eslint-plugin-react-native": "^3.7.0",
+    "husky": "^4.2.3",
     "jest": "24.9.0",
+    "lint-staged": "^10.0.7",
     "metro-react-native-babel-preset": "0.54.1",
     "react-test-renderer": "16.8.6"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+    },
+    "testMatch": [
+      "<rootDir>/(test/unit/**/*.spec.(js|jsx|ts|tsx)|**/__test__/*.(js|jsx|ts|tsx))"
+    ]
   }
 }
